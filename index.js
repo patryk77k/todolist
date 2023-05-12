@@ -24,8 +24,17 @@ addForm.addEventListener("submit", (e) => {
   addForm.reset();
 });
 
-// list.filter(() => {});
+const filterTodos = (term) => {
+  Array.from(list.children)
+    .filter((todo) => !todo.textContent.includes(term))
+    .forEach((todo) => todo.classList.add("filtered"));
+
+  Array.from(list.children)
+    .filter((todo) => todo.textContent.includes(term))
+    .forEach((todo) => todo.classList.remove("filtered"));
+};
 
 search.addEventListener("keyup", () => {
-  const term = search.value;
+  const term = search.value.trim();
+  filterTodos(term);
 });
